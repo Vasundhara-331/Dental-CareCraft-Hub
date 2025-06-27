@@ -1,212 +1,262 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Calendar, Clock, User, MapPin, Phone } from 'lucide-react';
+import { Badge } from '@/components/ui/badge';
+import { Calendar } from '@/components/ui/calendar';
+import { ChevronLeft, ChevronRight, Clock, User, Phone } from 'lucide-react';
+import { format } from 'date-fns';
 
 const DoctorSchedule = () => {
-  const todayAppointments = [
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
+  const [currentWeek, setCurrentWeek] = useState(new Date());
+
+  const appointments = [
     {
       id: 1,
-      time: "9:00 AM",
-      patient: "Emily Johnson",
-      phone: "+1 234-567-8901",
+      time: "09:00 AM",
+      duration: 30,
+      patient: "Riya Sharma",
+      phone: "+91 98765 43210",
       type: "Routine Checkup",
-      duration: "30 min",
-      status: "completed",
-      symptoms: "Regular checkup, no complaints",
-      notes: "Healthy teeth, recommended regular cleaning"
+      symptoms: "Regular cleaning and checkup",
+      status: "confirmed"
     },
     {
       id: 2,
       time: "10:30 AM",
-      patient: "Riya Sharma",
-      phone: "+1 234-567-8902",
-      type: "Consultation",
-      duration: "45 min",
-      status: "current",
-      symptoms: "Tooth sensitivity, pain when drinking cold water",
-      notes: ""
+      duration: 60,
+      patient: "John Doe",
+      phone: "+91 98765 43211",
+      type: "Root Canal",
+      symptoms: "Severe pain in lower molar",
+      status: "confirmed"
     },
     {
       id: 3,
-      time: "11:15 AM",
-      patient: "John Doe",
-      phone: "+1 234-567-8903",
-      type: "Root Canal",
-      duration: "90 min",
-      status: "urgent",
-      symptoms: "Severe pain in lower right molar, difficulty eating",
-      notes: ""
+      time: "12:00 PM",
+      duration: 45,
+      patient: "Sarah Wilson",
+      phone: "+91 98765 43212",
+      type: "Crown Fitting",
+      symptoms: "Crown replacement needed",
+      status: "pending"
     },
     {
       id: 4,
-      time: "2:00 PM",
-      patient: "Sarah Wilson",
-      phone: "+1 234-567-8904",
-      type: "Cleaning",
-      duration: "60 min",
-      status: "scheduled",
-      symptoms: "Regular cleaning appointment",
-      notes: ""
+      time: "02:00 PM",
+      duration: 30,
+      patient: "Mike Johnson",
+      phone: "+91 98765 43213",
+      type: "Consultation",
+      symptoms: "Tooth sensitivity",
+      status: "confirmed"
     },
     {
       id: 5,
-      time: "3:30 PM",
-      patient: "Michael Brown",
-      phone: "+1 234-567-8905",
-      type: "Follow-up",
-      duration: "30 min",
-      status: "scheduled",
-      symptoms: "Post-extraction follow-up",
-      notes: ""
+      time: "03:30 PM",
+      duration: 90,
+      patient: "Lisa Brown",
+      phone: "+91 98765 43214",
+      type: "Oral Surgery",
+      symptoms: "Wisdom tooth extraction",
+      status: "confirmed"
     }
   ];
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'completed': return 'bg-green-100 text-green-800';
-      case 'current': return 'bg-blue-100 text-blue-800';
-      case 'urgent': return 'bg-red-100 text-red-800';
-      default: return 'bg-gray-100 text-gray-800';
-    }
-  };
+  const timeSlots = [
+    "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM",
+    "12:00 PM", "12:30 PM", "01:00 PM", "01:30 PM", "02:00 PM", "02:30 PM",
+    "03:00 PM", "03:30 PM", "04:00 PM", "04:30 PM", "05:00 PM"
+  ];
 
-  const getStatusText = (status: string) => {
-    switch (status) {
-      case 'completed': return 'Completed';
-      case 'current': return 'In Progress';
-      case 'urgent': return 'Urgent';
-      default: return 'Scheduled';
-    }
+  const getAppointmentForSlot = (time: string) => {
+    return appointments.find(apt => apt.time === time);
   };
 
   return (
     <div className="space-y-6">
-      {/* Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Today's Schedule</h1>
-          <p className="text-gray-600">Tuesday, March 19, 2024</p>
+          <h1 className="text-2xl font-bold text-gray-900">My Schedule</h1>
+          <p className="text-gray-600">
+            {selectedDate ? format(selectedDate, 'EEEE, MMMM do, yyyy') : 'Select a date'}
+          </p>
         </div>
-        <div className="flex space-x-3">
+        <div className="flex space-x-2">
           <Button variant="outline">
-            <Calendar className="h-4 w-4 mr-2" />
-            View Calendar
+            <ChevronLeft className="h-4 w-4 mr-2" />
+            Previous Day
           </Button>
-          <Button>
-            Add Emergency Slot
+          <Button variant="outline">
+            Next Day
+            <ChevronRight className="h-4 w-4 ml-2" />
           </Button>
         </div>
       </div>
 
-      {/* Schedule Overview */}
-      <div className="grid md:grid-cols-4 gap-4">
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-blue-600">5</p>
-              <p className="text-sm text-gray-600">Total Appointments</p>
+      <div className="grid lg:grid-cols-4 gap-6">
+        {/* Calendar Sidebar */}
+        <Card className="lg:col-span-1">
+          <CardHeader>
+            <CardTitle className="text-lg">Calendar</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Calendar
+              mode="single"
+              selected={selectedDate}
+              onSelect={setSelectedDate}
+              className="rounded-md border"
+            />
+            
+            <div className="mt-6 space-y-3">
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <span className="text-sm text-gray-600">Available</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                <span className="text-sm text-gray-600">Booked</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                <span className="text-sm text-gray-600">Pending</span>
+              </div>
             </div>
           </CardContent>
         </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-green-600">1</p>
-              <p className="text-sm text-gray-600">Completed</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-orange-600">3</p>
-              <p className="text-sm text-gray-600">Remaining</p>
-            </div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">
-            <div className="text-center">
-              <p className="text-2xl font-bold text-red-600">1</p>
-              <p className="text-sm text-gray-600">Urgent</p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
 
-      {/* Appointments List */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Appointments</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {todayAppointments.map((appointment) => (
-              <div key={appointment.id} className="border rounded-lg p-6 hover:shadow-md transition-shadow">
-                <div className="flex items-start justify-between">
-                  <div className="flex space-x-4">
-                    <div className="text-center min-w-[80px]">
-                      <p className="font-semibold text-blue-600">{appointment.time}</p>
-                      <p className="text-sm text-gray-500">{appointment.duration}</p>
+        {/* Schedule Grid */}
+        <Card className="lg:col-span-3">
+          <CardHeader>
+            <CardTitle className="flex items-center space-x-2">
+              <Clock className="h-5 w-5" />
+              <span>Today's Schedule</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2">
+              {timeSlots.map((time) => {
+                const appointment = getAppointmentForSlot(time);
+                return (
+                  <div key={time} className="flex items-center border rounded-lg p-3">
+                    <div className="w-20 text-sm font-medium text-gray-600">
+                      {time}
                     </div>
-                    
-                    <div className="flex-1">
-                      <div className="flex items-center space-x-3 mb-2">
-                        <h3 className="font-semibold text-gray-900">{appointment.patient}</h3>
-                        <Badge className={getStatusColor(appointment.status)}>
-                          {getStatusText(appointment.status)}
-                        </Badge>
-                      </div>
-                      
-                      <div className="space-y-1 text-sm text-gray-600">
-                        <div className="flex items-center space-x-2">
-                          <Phone className="h-4 w-4" />
-                          <span>{appointment.phone}</span>
+                    <div className="flex-1 ml-4">
+                      {appointment ? (
+                        <div className="flex items-center justify-between">
+                          <div className="flex-1">
+                            <div className="flex items-center space-x-3">
+                              <User className="h-4 w-4 text-gray-400" />
+                              <div>
+                                <p className="font-medium text-gray-900">{appointment.patient}</p>
+                                <p className="text-sm text-gray-600">{appointment.type}</p>
+                                <p className="text-xs text-gray-500">{appointment.symptoms}</p>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-center space-x-3">
+                            <div className="text-right">
+                              <p className="text-xs text-gray-500 flex items-center">
+                                <Phone className="h-3 w-3 mr-1" />
+                                {appointment.phone}
+                              </p>
+                              <p className="text-xs text-gray-500">{appointment.duration} mins</p>
+                            </div>
+                            <Badge 
+                              variant={appointment.status === 'confirmed' ? 'default' : 'secondary'}
+                              className={
+                                appointment.status === 'confirmed' 
+                                  ? 'bg-blue-100 text-blue-800' 
+                                  : 'bg-orange-100 text-orange-800'
+                              }
+                            >
+                              {appointment.status}
+                            </Badge>
+                            <div className="flex space-x-1">
+                              <Button size="sm" variant="outline">
+                                View
+                              </Button>
+                              <Button size="sm" variant="outline">
+                                Reschedule
+                              </Button>
+                            </div>
+                          </div>
                         </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="h-4 w-4" />
-                          <span>{appointment.type}</span>
-                        </div>
-                      </div>
-                      
-                      <div className="mt-3">
-                        <p className="text-sm font-medium text-gray-700">Symptoms:</p>
-                        <p className="text-sm text-gray-600">{appointment.symptoms}</p>
-                      </div>
-                      
-                      {appointment.notes && (
-                        <div className="mt-2">
-                          <p className="text-sm font-medium text-gray-700">Notes:</p>
-                          <p className="text-sm text-gray-600">{appointment.notes}</p>
+                      ) : (
+                        <div className="flex items-center justify-between">
+                          <p className="text-gray-400 italic">Available</p>
+                          <Button size="sm" variant="ghost" className="text-green-600">
+                            + Block Time
+                          </Button>
                         </div>
                       )}
                     </div>
                   </div>
-                  
-                  <div className="flex flex-col space-y-2">
-                    <Button size="sm" variant="outline">
-                      View Patient
-                    </Button>
-                    {appointment.status === 'scheduled' && (
-                      <Button size="sm">
-                        Start Treatment
-                      </Button>
-                    )}
-                    {appointment.status === 'current' && (
-                      <Button size="sm" className="bg-green-600 hover:bg-green-700">
-                        Complete
-                      </Button>
-                    )}
-                  </div>
-                </div>
+                );
+              })}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* Quick Stats */}
+      <div className="grid md:grid-cols-4 gap-6">
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Today's Appointments</p>
+                <p className="text-2xl font-bold text-gray-900">{appointments.length}</p>
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+              <Clock className="h-8 w-8 text-blue-600" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Confirmed</p>
+                <p className="text-2xl font-bold text-green-600">
+                  {appointments.filter(a => a.status === 'confirmed').length}
+                </p>
+              </div>
+              <User className="h-8 w-8 text-green-600" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Pending</p>
+                <p className="text-2xl font-bold text-orange-600">
+                  {appointments.filter(a => a.status === 'pending').length}
+                </p>
+              </div>
+              <Clock className="h-8 w-8 text-orange-600" />
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-gray-600">Total Hours</p>
+                <p className="text-2xl font-bold text-purple-600">
+                  {Math.round(appointments.reduce((sum, apt) => sum + apt.duration, 0) / 60)}h
+                </p>
+              </div>
+              <Clock className="h-8 w-8 text-purple-600" />
+            </div>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 };

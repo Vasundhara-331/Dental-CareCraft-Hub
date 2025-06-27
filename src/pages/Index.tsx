@@ -1,117 +1,171 @@
 
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
 import { 
-  Calendar, 
-  Users, 
-  Shield, 
-  Heart, 
+  User, 
   Stethoscope, 
-  Clock, 
-  Star,
-  ArrowRight,
-  CheckCircle,
-  MessageCircle,
+  Shield, 
+  Calendar, 
+  Heart, 
+  Clock,
+  Users,
   CreditCard,
-  BarChart3
-} from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+  FileText,
+  Star,
+  ArrowRight
+} from "lucide-react";
 
 const Index = () => {
+  const features = [
+    {
+      icon: Calendar,
+      title: "Smart Scheduling",
+      description: "AI-powered appointment booking with conflict resolution"
+    },
+    {
+      icon: Heart,
+      title: "Patient Care",
+      description: "Comprehensive patient management and treatment tracking"
+    },
+    {
+      icon: FileText,
+      title: "Digital Records",
+      description: "Secure, accessible patient records and treatment history"
+    },
+    {
+      icon: Users,
+      title: "Multi-User Access",
+      description: "Role-based access for patients, doctors, and administrators"
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: "Dr. Sarah Johnson",
+      role: "General Dentist",
+      content: "CareCraft has revolutionized how I manage my practice. The scheduling system is intuitive and my patients love the easy booking process.",
+      rating: 5
+    },
+    {
+      name: "Riya Sharma",
+      role: "Patient",
+      content: "Finally, a dental portal that doesn't make me anxious! The tooth diagram feature helped me explain my pain clearly to my doctor.",
+      rating: 5
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="relative overflow-hidden py-20 px-4">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="mb-8">
-            <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-              Welcome to <span className="text-blue-600">CareCraft</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
-              Where Smiles Meet Smart Scheduling! 🦷
-            </p>
-            <p className="text-lg text-gray-700 mb-12 max-w-4xl mx-auto">
-              Managing dental health should be as comfortable as the smile it protects. 
-              Our Smart Dental Management System is designed not just for convenience, but for care.
-            </p>
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+      {/* Header */}
+      <header className="border-b bg-white/80 backdrop-blur-sm sticky top-0 z-50">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <div className="p-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg">
+                <Heart className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                  CareCraft
+                </h1>
+                <p className="text-sm text-gray-500">Dental Care Management</p>
+              </div>
+            </div>
+            <nav className="hidden md:flex items-center space-x-6">
+              <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors">Features</a>
+              <a href="#testimonials" className="text-gray-600 hover:text-blue-600 transition-colors">Testimonials</a>
+              <a href="#portals" className="text-gray-600 hover:text-blue-600 transition-colors">Portals</a>
+            </nav>
           </div>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <Badge className="mb-6 bg-blue-100 text-blue-800 hover:bg-blue-200">
+            🦷 Modern Dental Management Platform
+          </Badge>
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Your Smile's{" "}
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Digital Companion
+            </span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Experience dental care like never before. From smart appointment booking to comprehensive treatment tracking, 
+            CareCraft brings modern technology to dental practices with warmth and care.
+          </p>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 text-lg">
-              Get Started <ArrowRight className="ml-2 h-5 w-5" />
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+            <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+              Get Started Today
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
-            <Button variant="outline" size="lg" className="px-8 py-4 text-lg border-blue-200 hover:bg-blue-50">
+            <Button size="lg" variant="outline">
               Watch Demo
             </Button>
           </div>
-        </div>
-      </section>
 
-      {/* Portal Access Section */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-8">
-            Access Your Portal
-          </h2>
-          <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
-            Choose your role to access the appropriate dashboard
-          </p>
-          
-          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            {/* Patient Portal */}
-            <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-green-500">
-              <CardContent className="p-8 text-center">
-                <div className="p-4 bg-green-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <Heart className="h-8 w-8 text-green-600" />
+          {/* Portal Access Cards */}
+          <div id="portals" className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <Card className="hover:shadow-lg transition-all duration-300 border-2 hover:border-blue-200">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto p-3 bg-blue-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                  <User className="h-8 w-8 text-blue-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Patient Portal</h3>
+                <CardTitle className="text-xl text-gray-900">Patient Portal</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
                 <p className="text-gray-600 mb-6">
-                  Book appointments, view history, and manage your dental care
+                  Book appointments, view history, manage payments, and communicate with your dental team.
                 </p>
                 <Link to="/patient">
-                  <Button className="w-full bg-green-600 hover:bg-green-700">
-                    Enter Patient Portal <ArrowRight className="ml-2 h-4 w-4" />
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                    Access Patient Portal
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
             </Card>
 
-            {/* Doctor Portal */}
-            <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-blue-500">
-              <CardContent className="p-8 text-center">
-                <div className="p-4 bg-blue-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
-                  <Stethoscope className="h-8 w-8 text-blue-600" />
+            <Card className="hover:shadow-lg transition-all duration-300 border-2 hover:border-green-200">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto p-3 bg-green-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                  <Stethoscope className="h-8 w-8 text-green-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Doctor Portal</h3>
+                <CardTitle className="text-xl text-gray-900">Doctor Portal</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
                 <p className="text-gray-600 mb-6">
-                  Manage appointments, view patient records, and provide care
+                  Manage schedules, patient records, treatment notes, and track practice performance.
                 </p>
                 <Link to="/doctor">
-                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                    Enter Doctor Portal <ArrowRight className="ml-2 h-4 w-4" />
+                  <Button className="w-full bg-green-600 hover:bg-green-700">
+                    Access Doctor Portal
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
             </Card>
 
-            {/* Admin Portal */}
-            <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-purple-500">
-              <CardContent className="p-8 text-center">
-                <div className="p-4 bg-purple-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+            <Card className="hover:shadow-lg transition-all duration-300 border-2 hover:border-purple-200">
+              <CardHeader className="text-center pb-4">
+                <div className="mx-auto p-3 bg-purple-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
                   <Shield className="h-8 w-8 text-purple-600" />
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">Admin Portal</h3>
+                <CardTitle className="text-xl text-gray-900">Admin Portal</CardTitle>
+              </CardHeader>
+              <CardContent className="text-center">
                 <p className="text-gray-600 mb-6">
-                  Manage clinic operations, staff, and system settings
+                  Complete clinic management with analytics, doctor oversight, and system administration.
                 </p>
                 <Link to="/admin">
                   <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                    Enter Admin Portal <ArrowRight className="ml-2 h-4 w-4" />
+                    Access Admin Portal
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
               </CardContent>
@@ -120,240 +174,131 @@ const Index = () => {
         </div>
       </section>
 
-      {/* User Roles Section */}
-      <section className="py-20 px-4 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">
-            Designed for Everyone in Dental Care
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Patient Card */}
-            <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-green-500">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="p-3 bg-green-100 rounded-full mr-4">
-                    <Heart className="h-8 w-8 text-green-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900">For Patients</h3>
-                </div>
-                
-                <p className="text-gray-600 mb-6 text-lg">
-                  🌟 No more endless phone calls or guesswork.
-                </p>
-                
-                <ul className="space-y-4 mb-8">
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Book appointments with real-time availability</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Interactive dental diagram for precise symptom reporting</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">AI-powered chatbot for symptom assessment</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-green-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Secure payments and treatment history</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Doctor Card */}
-            <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-blue-500">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="p-3 bg-blue-100 rounded-full mr-4">
-                    <Stethoscope className="h-8 w-8 text-blue-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900">For Doctors</h3>
-                </div>
-                
-                <p className="text-gray-600 mb-6 text-lg">
-                  🩺 Your digital assistant is here.
-                </p>
-                
-                <ul className="space-y-4 mb-8">
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-blue-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Daily appointments and patient details at a glance</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-blue-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Pre-appointment symptom reports and AI triage</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-blue-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Quick treatment notes and follow-up recommendations</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-blue-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Streamlined workflow management</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            {/* Admin Card */}
-            <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-purple-500">
-              <CardContent className="p-8">
-                <div className="flex items-center mb-6">
-                  <div className="p-3 bg-purple-100 rounded-full mr-4">
-                    <Shield className="h-8 w-8 text-purple-600" />
-                  </div>
-                  <h3 className="text-2xl font-bold text-gray-900">For Admins</h3>
-                </div>
-                
-                <p className="text-gray-600 mb-6 text-lg">
-                  🧾 Keep the clinic running like clockwork.
-                </p>
-                
-                <ul className="space-y-4 mb-8">
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-purple-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Central dashboard for doctors and schedules</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-purple-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Payment tracking and insightful reports</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-purple-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Dynamic scheduling with emergency handling</span>
-                  </li>
-                  <li className="flex items-start">
-                    <CheckCircle className="h-5 w-5 text-purple-500 mt-1 mr-3 flex-shrink-0" />
-                    <span className="text-gray-700">Optimize staffing and clinic operations</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
-      {/* Smart Features Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-50 to-indigo-50">
-        <div className="max-w-7xl mx-auto">
+      {/* Features Section */}
+      <section id="features" className="py-20 px-4 bg-white">
+        <div className="container mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              🧠 Smarter, Not Just Faster
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Built for Modern Dental Practices
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              CareCraft combines cutting-edge technology with healthcare expertise
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+              Every feature is designed with both efficiency and patient comfort in mind
             </p>
           </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <MessageCircle className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="font-semibold text-gray-900 mb-2">AI Chatbot</h3>
-              <p className="text-gray-600 text-sm">Guided symptom reporting with intelligent assistance</p>
-            </Card>
-            
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <Clock className="h-12 w-12 text-green-600 mx-auto mb-4" />
-              <h3 className="font-semibold text-gray-900 mb-2">Smart Triaging</h3>
-              <p className="text-gray-600 text-sm">Helps doctors prioritize urgent cases efficiently</p>
-            </Card>
-            
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <Shield className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-              <h3 className="font-semibold text-gray-900 mb-2">Secure Access</h3>
-              <p className="text-gray-600 text-sm">Role-based login with JWT authentication</p>
-            </Card>
-            
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <CreditCard className="h-12 w-12 text-orange-600 mx-auto mb-4" />
-              <h3 className="font-semibold text-gray-900 mb-2">Digital Payments</h3>
-              <p className="text-gray-600 text-sm">Seamless Razorpay & Stripe integration</p>
-            </Card>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {features.map((feature, index) => (
+              <Card key={index} className="text-center hover:shadow-md transition-shadow">
+                <CardContent className="p-6">
+                  <div className="mx-auto p-3 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full w-16 h-16 flex items-center justify-center mb-4">
+                    <feature.icon className="h-8 w-8 text-blue-600" />
+                  </div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 px-4 bg-white">
-        <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">
-            What Our Users Say
-          </h2>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="p-6">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-4">
-                "CareCraft transformed how we manage our dental practice. The AI chatbot helps patients 
-                describe their symptoms clearly, and the scheduling system eliminated double bookings completely."
-              </p>
-              <div className="font-semibold text-gray-900">Dr. Sarah Johnson</div>
-              <div className="text-gray-600 text-sm">Dental Clinic Director</div>
-            </Card>
-            
-            <Card className="p-6">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-4">
-                "As a patient, I love how easy it is to book appointments and explain exactly which tooth 
-                is bothering me. The interactive diagram is genius!"
-              </p>
-              <div className="font-semibold text-gray-900">Michael Chen</div>
-              <div className="text-gray-600 text-sm">Happy Patient</div>
-            </Card>
-            
-            <Card className="p-6">
-              <div className="flex mb-4">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <p className="text-gray-700 mb-4">
-                "The admin dashboard gives us incredible insights into our practice. Payment tracking 
-                and reporting features have streamlined our operations significantly."
-              </p>
-              <div className="font-semibold text-gray-900">Lisa Rodriguez</div>
-              <div className="text-gray-600 text-sm">Practice Manager</div>
-            </Card>
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-20 px-4 bg-gray-50">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              Loved by Patients & Doctors
+            </h2>
+            <p className="text-xl text-gray-600">See what our users have to say</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <Card key={index} className="bg-white">
+                <CardContent className="p-6">
+                  <div className="flex mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="h-5 w-5 text-yellow-400 fill-current" />
+                    ))}
+                  </div>
+                  <p className="text-gray-700 mb-4 italic">"{testimonial.content}"</p>
+                  <div>
+                    <p className="font-semibold text-gray-900">{testimonial.name}</p>
+                    <p className="text-sm text-gray-500">{testimonial.role}</p>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6">
+      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 to-purple-600">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
             Ready to Transform Your Dental Practice?
           </h2>
-          <p className="text-xl mb-8 opacity-90">
-            CareCraft isn't just software — it's the bridge between healthcare and happiness. 
-            Let's make dental care modern, mindful, and magical.
+          <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+            Join thousands of dental professionals who have already made the switch to modern, 
+            patient-friendly practice management.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg">
-              Start Free Trial <ArrowRight className="ml-2 h-5 w-5" />
+            <Button size="lg" className="bg-white text-blue-600 hover:bg-gray-100">
+              Start Free Trial
             </Button>
-            <Button variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg">
+            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-blue-600">
               Schedule Demo
             </Button>
           </div>
-          <p className="text-lg mt-8 opacity-75">
-            Let's CareCraft. 🪥
-          </p>
         </div>
       </section>
 
-      <Footer />
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 px-4">
+        <div className="container mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <div className="flex items-center space-x-2 mb-4">
+                <Heart className="h-6 w-6 text-blue-400" />
+                <span className="text-xl font-bold">CareCraft</span>
+              </div>
+              <p className="text-gray-400">
+                Modern dental care management platform designed with patient comfort and practice efficiency in mind.
+              </p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Portals</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><Link to="/patient" className="hover:text-white transition-colors">Patient Portal</Link></li>
+                <li><Link to="/doctor" className="hover:text-white transition-colors">Doctor Portal</Link></li>
+                <li><Link to="/admin" className="hover:text-white transition-colors">Admin Portal</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Features</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Appointment Booking</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Patient Records</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Payment Processing</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Analytics</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4">Support</h4>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#" className="hover:text-white transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Contact Us</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-white transition-colors">Terms of Service</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 CareCraft. All rights reserved. Built with ❤️ for dental professionals.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

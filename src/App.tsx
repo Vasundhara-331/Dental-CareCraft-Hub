@@ -41,6 +41,15 @@ const App = () => (
             <Route path="history" element={<AppointmentHistory />} />
             <Route path="reports" element={<DoctorDashboard />} />
           </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="doctors" element={<ManageDoctors />} />
+            <Route path="appointments" element={<AdminAppointments />} />
+            <Route path="patients" element={<PatientRecords />} />
+            <Route path="payments" element={<PaymentsPage />} />
+            <Route path="reports" element={<AdminReports />} />
+            <Route path="settings" element={<AdminDashboard />} />
+          </Route>
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
