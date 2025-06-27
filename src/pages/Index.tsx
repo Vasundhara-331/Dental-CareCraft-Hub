@@ -52,8 +52,76 @@ const Index = () => {
         </div>
       </section>
 
-      {/* User Roles Section */}
+      {/* Portal Access Section */}
       <section className="py-20 px-4 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-4xl font-bold text-center text-gray-900 mb-8">
+            Access Your Portal
+          </h2>
+          <p className="text-xl text-gray-600 text-center mb-16 max-w-3xl mx-auto">
+            Choose your role to access the appropriate dashboard
+          </p>
+          
+          <div className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {/* Patient Portal */}
+            <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-green-500">
+              <CardContent className="p-8 text-center">
+                <div className="p-4 bg-green-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Heart className="h-8 w-8 text-green-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Patient Portal</h3>
+                <p className="text-gray-600 mb-6">
+                  Book appointments, view history, and manage your dental care
+                </p>
+                <Link to="/patient">
+                  <Button className="w-full bg-green-600 hover:bg-green-700">
+                    Enter Patient Portal <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            {/* Doctor Portal */}
+            <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-blue-500">
+              <CardContent className="p-8 text-center">
+                <div className="p-4 bg-blue-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Stethoscope className="h-8 w-8 text-blue-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Doctor Portal</h3>
+                <p className="text-gray-600 mb-6">
+                  Manage appointments, view patient records, and provide care
+                </p>
+                <Link to="/doctor">
+                  <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                    Enter Doctor Portal <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+
+            {/* Admin Portal */}
+            <Card className="group hover:shadow-xl transition-all duration-300 border-l-4 border-l-purple-500">
+              <CardContent className="p-8 text-center">
+                <div className="p-4 bg-purple-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
+                  <Shield className="h-8 w-8 text-purple-600" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">Admin Portal</h3>
+                <p className="text-gray-600 mb-6">
+                  Manage clinic operations, staff, and system settings
+                </p>
+                <Link to="/admin">
+                  <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                    Enter Admin Portal <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* User Roles Section */}
+      <section className="py-20 px-4 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-4xl font-bold text-center text-gray-900 mb-16">
             Designed for Everyone in Dental Care
@@ -92,10 +160,6 @@ const Index = () => {
                     <span className="text-gray-700">Secure payments and treatment history</span>
                   </li>
                 </ul>
-                
-                <Button className="w-full bg-green-600 hover:bg-green-700">
-                  Patient Portal <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
               </CardContent>
             </Card>
 
@@ -131,10 +195,6 @@ const Index = () => {
                     <span className="text-gray-700">Streamlined workflow management</span>
                   </li>
                 </ul>
-                
-                <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                  Doctor Dashboard <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
               </CardContent>
             </Card>
 
@@ -170,10 +230,6 @@ const Index = () => {
                     <span className="text-gray-700">Optimize staffing and clinic operations</span>
                   </li>
                 </ul>
-                
-                <Button className="w-full bg-purple-600 hover:bg-purple-700">
-                  Admin Panel <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
               </CardContent>
             </Card>
           </div>
